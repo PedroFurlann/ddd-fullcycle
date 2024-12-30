@@ -1,7 +1,9 @@
+import Address from "../value_object/address";
+
 class Customer {
   _id: string;
   _name: string;
-  _address: string = "";
+  _address!: Address;
   _active: boolean = false;
 
   constructor(id: string, name: string) {
@@ -26,7 +28,7 @@ class Customer {
   }
 
   activate() {
-    if (!this._address) {
+    if (this._address === undefined || this._address === null) {
       throw new Error("Address is mandatory to activate a customer.");
     }
     this._active = true;
@@ -34,5 +36,9 @@ class Customer {
 
   deactivate() {
     this._active = false;
+  }
+
+  setAddress(address: Address) {
+    this._address = address;
   }
 }
