@@ -1,6 +1,6 @@
-import Address from "../value_object/address";
+import Address from "../value_objects/address";
 
-class Customer {
+export default class Customer {
   _id: string;
   _name: string;
   _address!: Address;
