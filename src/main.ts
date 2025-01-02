@@ -5,7 +5,7 @@ import Address from "./value_objects/address";
 
 let customer = new Customer("123", "Pedro Furlan");
 const address = new Address("Rua dois", "São Paulo", "SP", 2, "12345-678");
-customer.setAddress(address);
+customer.Address = address;
 customer.activate();
 
 const item1 = new OrderItem("1", "Item 1", 10, "p1", 2);

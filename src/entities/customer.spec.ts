@@ -29,7 +29,7 @@ describe("Customer unit tests", () => {
 
     const address = new Address("Ruas 2", "São Paulo", "SP", 2, "12345-678");
 
-    customer.setAddress(address);
+    customer.Address = address;
 
     customer.activate();
 
@@ -50,5 +50,19 @@ describe("Customer unit tests", () => {
     expect(() => customer.activate()).toThrow(
       "Address is mandatory to activate a customer."
     );
+  });
+
+  it("should add reward points", () => {
+    const customer = new Customer("1", "John Doe");
+
+    expect(customer.rewardPoints).toBe(0);
+
+    customer.addRewardPoints(10);
+
+    expect(customer.rewardPoints).toBe(10);
+
+    customer.addRewardPoints(10);
+
+    expect(customer.rewardPoints).toBe(20);
   });
 });
