@@ -10,6 +10,7 @@ import ProductRepository from "./product_repository";
 import Product from "../../domain/entities/product";
 import OrderItem from "../../domain/entities/order_item";
 import Order from "../../domain/entities/order";
+import OrderRepository from "./order_repository";
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
@@ -23,8 +24,8 @@ describe("Order repository test", () => {
     });
 
     await sequelize.addModels([
-      OrderModel,
       CustomerModel,
+      OrderModel,
       OrderItemModel,
       ProductModel,
     ]);
@@ -35,7 +36,7 @@ describe("Order repository test", () => {
     await sequelize.close();
   });
 
-  it("should create an order", async () => {
+  it("should create a new order", async () => {
     const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
@@ -43,38 +44,39 @@ describe("Order repository test", () => {
     await customerRepository.create(customer);
 
     const productRepository = new ProductRepository();
-    const product = new Product("1", "Product 1", 100);
+    const product = new Product("123", "Product 1", 10);
     await productRepository.create(product);
 
     const orderItem = new OrderItem(
-      "item 1",
+      "1",
       product.name,
       product.price,
       product.id,
       2
     );
 
+    const order = new Order("123", "123", [orderItem]);
+
     const orderRepository = new OrderRepository();
-    const order = new Order("1", customer.id, [orderItem]);
     await orderRepository.create(order);
 
     const orderModel = await OrderModel.findOne({
       where: { id: order.id },
-      include: [OrderItemModel],
+      include: ["items"],
     });
 
     expect(orderModel.toJSON()).toStrictEqual({
-      id: order.id,
-      customerId: customer.id,
+      id: "123",
+      customer_id: "123",
       total: order.total(),
-      orderItems: [
+      items: [
         {
           id: orderItem.id,
           name: orderItem.name,
           price: orderItem.price,
-          productId: product.id,
           quantity: orderItem.quantity,
-          order_id: order.id,
+          order_id: "123",
+          product_id: "123",
         },
       ],
     });
