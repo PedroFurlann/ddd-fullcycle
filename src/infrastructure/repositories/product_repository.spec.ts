@@ -64,7 +64,7 @@ describe("Product Repository Test", () => {
     const product = new Product("1", "Product 1", 100);
     await productRepository.create(product);
 
-    const foundProduct = await productRepository.findById("1");
+    const foundProduct = await productRepository.find("1");
 
     expect(foundProduct).toStrictEqual(product);
   });

@@ -22,7 +22,7 @@ export default class ProductRepository implements ProductRepositoryInterface {
       }
     );
   }
-  async findById(id: string): Promise<Product | null> {
+  async find(id: string): Promise<Product | null> {
     const product = await ProductModel.findOne({ where: { id } });
 
     return product
