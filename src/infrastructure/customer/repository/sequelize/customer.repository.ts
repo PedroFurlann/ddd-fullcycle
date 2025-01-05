@@ -1,8 +1,7 @@
-import Customer from "../../domain/entities/customer";
-import CustomerRepositoryInterface from "../../domain/repositories/customer_repository.interface";
-import Address from "../../domain/value_objects/address";
-import CustomerModel from "../database/sequelize/model/customer.model";
-
+import Customer from "../../../../domain/entities/customer";
+import CustomerRepositoryInterface from "../../../../domain/repositories/customer_repository.interface";
+import Address from "../../../../domain/value_objects/address";
+import CustomerModel from "./customer.model";
 
 export default class CustomerRepository implements CustomerRepositoryInterface {
   async create(entity: Customer): Promise<void> {
@@ -58,10 +57,6 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
       customerModel.city
     );
     customer.changeAddress(address);
-    if (customerModel.active) {
-      customer.activate();
-    }
-    customer.addRewardPoints(customerModel.rewardPoints);
     return customer;
   }
 

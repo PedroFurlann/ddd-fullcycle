@@ -50,4 +50,8 @@ export default class Order {
   total() {
     return this._items.reduce((acc, item) => acc + this.calculateTotalItem(item), 0);
   }
+
+  addItem(item: OrderItem) {
+    this._items.push(item);
+  }
 }
