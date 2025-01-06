@@ -6,11 +6,11 @@ import ProductRepository from "../../../product/repository/sequelize/product.rep
 import OrderItemModel from "./order-item.model";
 import OrderModel from "./order.model";
 import OrderRepository from "./order.repository";
-import Order from "../../../../domain/entities/order";
-import OrderItem from "../../../../domain/entities/order_item";
-import Product from "../../../../domain/entities/product";
-import Address from "../../../../domain/value_objects/address";
-import Customer from "../../../../domain/entities/customer";
+import Order from "../../../../domain/checkout/entities/order";
+import OrderItem from "../../../../domain/checkout/entities/order_item";
+import Product from "../../../../domain/product/entities/product";
+import Address from "../../../../domain/customer/value_objects/address";
+import Customer from "../../../../domain/customer/entities/customer";
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
