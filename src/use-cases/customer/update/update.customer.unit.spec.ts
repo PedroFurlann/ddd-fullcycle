@@ -16,7 +16,7 @@ const input = {
     city: "São Paulo Updated",
     zip: "12345678 Updated",
   },
-}
+};
 
 const MockRepository = () => {
   return {
@@ -25,7 +25,7 @@ const MockRepository = () => {
     find: jest.fn().mockResolvedValue(customer),
     findAll: jest.fn(),
   };
-}
+};
 
 describe("Unit test update customer use case", () => {
   it("should update a customer", async () => {
@@ -35,5 +35,5 @@ describe("Unit test update customer use case", () => {
     const output = await customerUpdateUseCase.execute(input);
 
     expect(output).toEqual(input);
-  })
+  });
 });
