@@ -1,6 +1,3 @@
-import { Sequelize } from "sequelize-typescript";
-import CustomerModel from "../../../infrastructure/customer/repository/sequelize/customer.model";
-import CustomerRepository from "../../../infrastructure/customer/repository/sequelize/customer.repository";
 import Customer from "../../../domain/customer/entities/customer";
 import Address from "../../../domain/customer/value_objects/address";
 import FindCustomerUseCase from "./find.customer.usecase";
@@ -18,7 +15,7 @@ const MockRepository = () => {
   };
 };
 
-describe("Test find customer use case", () => {
+describe("Unit test find customer use case", () => {
   it("should find a customer", async () => {
     const customerRepository = MockRepository();
     const usecase = new FindCustomerUseCase(customerRepository);
