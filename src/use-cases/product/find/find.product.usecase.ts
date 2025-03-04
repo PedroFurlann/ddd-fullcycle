@@ -1,5 +1,5 @@
-import ProductRepositoryInterface from "../../domain/product/repositories/product_repository.interface";
-import { InputFindProducctDto, OutputFindProducctDto } from "./find/find.product.dto";
+import ProductRepositoryInterface from "../../../domain/product/repositories/product_repository.interface";
+import { InputFindProducctDto, OutputFindProducctDto } from "./find.product.dto";
 
 export default class FindProductUseCase {
   private productRepository: ProductRepositoryInterface;

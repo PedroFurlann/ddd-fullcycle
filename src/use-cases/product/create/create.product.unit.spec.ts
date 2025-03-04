@@ -1,28 +1,29 @@
 import Product from "../../../domain/product/entities/product";
-import FindProductUseCase from "./find.product.usecase";
+import CreateProductUsecase from "./create.product.usecase";
 
-const product = new Product("1", "Product 1", 100);
 
 const input = {
-  id: product.id,
+  type: "a",
+  name: "Product 1",
+  price: 100,
 }
 
 const MockRepository = () => {
   return {
     create: jest.fn(),
     update: jest.fn(),
-    find: jest.fn().mockResolvedValue(product),
+    find: jest.fn(),
     findAll: jest.fn(),
   };
 };
 
-describe("Unit test find product use case", () => {
-  it("should find a product", async () => {
+describe("Unit test create product use case", () => {
+  it("should create a product", async () => {
     const productRepository = MockRepository();
-    const usecase = new FindProductUseCase(productRepository);
+    const usecase = new CreateProductUsecase(productRepository);
 
     const output = {
-      id: "1",
+      id: expect.any(String),
       name: "Product 1",
       price: 100,
     };
