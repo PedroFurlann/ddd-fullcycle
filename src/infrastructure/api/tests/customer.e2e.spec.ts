@@ -30,4 +30,51 @@ describe("E2E test customer", () => {
     expect(response.body.address.zip).toBe("12345");
     expect(response.body.address.city).toBe("São Paulo");
   });
+
+  it("should not create a customer without address", async () => {
+    const response = await request(app)
+      .post("/customer")
+      .send({
+        name: "Pedro Furlan",
+      });
+
+    expect(response.status).toBe(500);
+  });
+
+  it("should list all customers", async () => {
+    await request(app)
+      .post("/customer")
+      .send({
+        name: "Pedro Furlan",
+        address: {
+          street: "Rua 1",
+          number: "123",
+          zip: "12345",
+          city: "São Paulo",
+        },
+      });
+
+    await request(app)
+      .post("/customer")
+      .send({
+        name: "João Silva",
+        address: {
+          street: "Rua 2",
+          number: "456",
+          zip: "54321",
+          city: "Rio de Janeiro",
+        },
+      });
+
+    const response = await request(app).get("/customer");
+
+    expect(response.status).toBe(200);
+    expect(response.body.customers.length).toBe(2);
+    const customer1 = response.body.customers[0];
+    expect(customer1.name).toBe("Pedro Furlan");
+    expect(customer1.address.city).toBe("São Paulo");
+    const customer2 = response.body.customers[1];
+    expect(customer2.name).toBe("João Silva");
+    expect(customer2.address.city).toBe("Rio de Janeiro");
+  })
 });
